@@ -38,9 +38,8 @@ export default function Movie(){
             <div style={{padding: "1px", margin: "0px 4px", backgroundColor: "gray"}}>
                 <div style={{width: "100%", display: "flex", alignItems: "center", padding: "10px 20px"}}>
                     <div style={{width: "5%", display: "flex", justifyContent: "center"}}>ID</div>
-                    <div style={{width: "24%", display: "flex", justifyContent: "center"}}>Name</div>
-                    <div style={{width: "20%", display: "flex", justifyContent: "center"}}>Director</div>
-                    <div style={{width: "20%", display: "flex", justifyContent: "center"}}>Production</div>
+                    <div style={{width: "44%", display: "flex", justifyContent: "center"}}>Name</div>
+                    <div style={{width: "20%", display: "flex", justifyContent: "center"}}>Category</div>
                     <div style={{width: "10%", display: "flex", justifyContent: "center"}}>Age restrition</div>
                     <div style={{width: "8%", display: "flex", justifyContent: "center"}}>Rating</div>
                     <div style={{width: "13%", display: "flex", justifyContent: "center"}}>Actions</div>
@@ -50,15 +49,11 @@ export default function Movie(){
                         return(
                             <div style={{width: "100%", display: "flex", alignItems: "center", padding: "10px 20px", backgroundColor: "white", fontSize: "12px", borderTop: "1px solid gray"}}>
                                 <div style={{width: "5%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.id}</div>
-                                <div style={{width: "24%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.name}</div>
-                                <div style={{width: "20%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.director}</div>
-                                <div style={{width: "20%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.production}</div>
+                                <div style={{width: "44%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.name}</div>
+                                <div style={{width: "20%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.category}</div>
                                 <div style={{width: "10%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.age_restriction}</div>
                                 <div style={{width: "8%", padding: "1px", display: "flex", justifyContent: "center"}}>{m.rating}</div>
                                 <div style={{width: "13%", padding: "1px", display: "flex", justifyContent: "space-around"}} className='ps-3'>
-                                    <Link to={''}>
-                                        <button style={{backgroundColor: "green", border: "none", borderRadius: "8px", color: "white", paddingLeft: "5px", paddingRight: "5px"}}><b>More</b></button>
-                                    </Link>
                                     <Link to={'/admin/movie/'+m.id+'/edit'}  className='ms-2'>
                                         <button style={{backgroundColor: "blue", border: "none", borderRadius: "8px", color: "white", paddingLeft: "5px", paddingRight: "5px"}}><b>Edit</b></button>
                                     </Link>

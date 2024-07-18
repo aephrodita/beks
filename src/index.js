@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import {getAllCinema, getAllMovie, getAllSeance, getAllUser, getOneCinema, getOneMovie, getOneSeance, getOneTicket} from './api';
+import {getAllCinema, getAllMovie, getAllSeance, getAllUser, getOneCinema, getOneMovie, getOneSeance, getOneTicket, getAllHall} from './api';
 import "./css/10aaa259d52e5e10.css";
 import './css/main.a1b621fc.chunk.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,6 +26,10 @@ import CreateMovie from './admin/createForm/CreateMovie';
 import CreateSeance from './admin/createForm/CreateSeance';
 import EditMovie from './admin/editForm/EditMovie';
 import CreateCinema from './admin/createForm/CreateCinema';
+import MyTicket from './MyTicket';
+import EditCinema from './admin/editForm/EditCinema';
+import AdminHall from './admin/AdminHall';
+import CreateHall from './admin/createForm/CreateHall';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -44,7 +48,11 @@ const routes = createBrowserRouter(
                 {
                     path: "/sign-up",
                     element: <SignUp />,
-                }
+                },
+                {
+                    path: "/ticket",
+                    element: <MyTicket />,
+                },
             ]
         },
         {
@@ -123,7 +131,6 @@ const routes = createBrowserRouter(
                             path: "/admin/movie/:movieId/edit",
                             element: <EditMovie />,
                             loader: async ( {params} ) => {
-                                console.log(params)
                                 const id = parseInt(params.movieId)
                                 return getOneMovie(id)
                             }
@@ -144,6 +151,19 @@ const routes = createBrowserRouter(
                     ]
                 },
                 {
+                    path: "/admin/hall",
+                    element: <AdminHall />,
+                    loader: async () => {
+                        return (await getAllHall())
+                    },
+                    children: [
+                        {
+                            path: "/admin/hall/create",
+                            element: <CreateHall />,
+                        }
+                    ]
+                },
+                {
                     path: "/admin/cinema",
                     element: <AdminCinema />,
                     loader: async () => {
@@ -153,6 +173,14 @@ const routes = createBrowserRouter(
                         {
                             path: "/admin/cinema/create",
                             element: <CreateCinema />,
+                        },
+                        {
+                            path: "/admin/cinema/:cinemaId/edit",
+                            element: <EditCinema />,
+                            loader: async ( {params} ) => {
+                                const id = parseInt(params.cinemaId)
+                                return getOneCinema(id)
+                            }
                         }
                     ]
                 }

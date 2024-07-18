@@ -187,7 +187,7 @@ export default function App () {
                                             <section>
                                                 <h3>{m.name}</h3>
                                                 <div className="info">
-                                                    <span>боевик</span>
+                                                    <span>{m.category}</span>
                                                 </div>
                                             </section>
                                         </article>

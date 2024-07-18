@@ -47,9 +47,8 @@ export default function Movie(){
                                 <div className="full-width">
                                     <div className="d-flex space-between">
                                         <div>
-                                            <div className="title">{movie.data.name_kaz}</div>
                                             <div className="about-movie-hint-text bold mt-8 rd-text-color">{movie.data.name}</div>
-                                            <div className="about-movie-hint-text weight-400 mt-8">драма</div>
+                                            <div className="about-movie-hint-text weight-400 mt-8">{movie.data.category}</div>
                                         </div>
                                     </div>
                                     <div className="mt-24 d-flex gap-10">

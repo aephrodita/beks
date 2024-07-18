@@ -10,19 +10,13 @@ export default function CreateMovie(){
 
     const [movie, setMovie] = useState({
         name: '',
-        name_kaz: '',
-        name_rus: '',
-        director: '',
-        production: '',
+        category: '',
         age_restriction: 0,
         rating: 0
     });
 
     const handleName = (event) => {setMovie({...movie, name: event.target.value})}
-    const handleNameKaz = (event) => {setMovie({...movie, name_kaz: event.target.value})}
-    const handleNameRus = (event) => {setMovie({...movie, name_rus: event.target.value})}
-    const handleDirector = (event) => { setMovie({...movie, director: event.target.value}) }
-    const handleProduction = (event) => { setMovie({...movie, production: event.target.value}) }
+    const handleCategory = (event) => { setMovie({...movie, category: event.target.value}) }
     const handleAgeRestrition = (event) => { setMovie({...movie, age_restriction: parseInt(event.target.value)}) }
     const handleRating = (event) => { setMovie({...movie, rating: parseInt(event.target.value)}) }
 
@@ -36,7 +30,7 @@ export default function CreateMovie(){
         }else{
             toast(data)
         }
-        
+    
     }
 
 
@@ -58,20 +52,8 @@ export default function CreateMovie(){
                                         <input type="text" class="form-control" placeholder="Enter name" value={movie.name} onChange={handleName}/>
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label>Name the movie: </label>
-                                        <input type="text" class="form-control" placeholder="Enter name" value={movie.name_kaz} onChange={handleNameKaz}/>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label>Name the movie: </label>
-                                        <input type="text" class="form-control" placeholder="Enter name" value={movie.name_rus} onChange={handleNameRus}/>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label>Director: </label>
-                                        <input type="text" class="form-control" placeholder="Enter Director" value={movie.director} onChange={handleDirector}/>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label>Production: </label>
-                                        <input type="text" class="form-control" placeholder="Enter Production" value={movie.production} onChange={handleProduction}/>
+                                        <label>Category: </label>
+                                        <input type="text" class="form-control" placeholder="Enter Category" value={movie.category} onChange={handleCategory}/>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label>Age restrition: </label>

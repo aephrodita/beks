@@ -1,38 +1,37 @@
 import axios from 'axios';
 
-
-
-
+// Функция для получения заголовка авторизации
 const authHeader = () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.token){
-        return {Authorization: "Bearer " + user.token}
-    }
-    else{
+    if (user && user.token) {
+        return { Authorization: "Bearer " + user.token };
+    } else {
         return {};
     }
 }
 
+// Функция для входа в систему
 export const Login = async (username, password) => {
-    try{
+    try {
         const response = await axios.post('http://localhost:8091/auth/sign-in', 
             {
                 username: username,
                 password: password
             },
             { headers: authHeader() }
-        )
+        );
 
-        localStorage.setItem("user", JSON.stringify(response.data))
-        return {success: true, data: "Вы вошли в систему..."}
+        localStorage.setItem("user", JSON.stringify(response.data));
+        return { success: true, data: "Вы вошли в систему..." };
 
-    }catch(error){
-        return {success: false, data: error.response.data};
+    } catch (error) {
+        return { success: false, data: error.response.data };
     }
 }
 
+// Функция для регистрации нового пользователя
 export const signUp = async (username, email, password) => {
-    try{
+    try {
         const response = await axios.post('http://localhost:8091/auth/sign-up',
             {
                 email: email,
@@ -40,193 +39,283 @@ export const signUp = async (username, email, password) => {
                 username: username
             },
             { headers: authHeader() }
-        )
-        
-        return {success: true, data: "тіркелді"};
-        
-    }catch(error){
-        return {success: false, data: error.response.data};
+        );
+
+        return { success: true, data: "тіркелді" };
+
+    } catch (error) {
+        return { success: false, data: error.response.data };
     }
 }
 
-
-
-export async function checkAdmin(){
-    try{
-        const response = await axios.get(`http://localhost:8091/admin`, {headers:authHeader()});
-        return {success: true, data: response.data}
-    }catch(error){
-        return {success: false, data: "у вас нету разрешении"};
+// Функция для проверки прав администратора
+export async function checkAdmin() {
+    try {
+        const response = await axios.get(`http://localhost:8091/admin`, { headers: authHeader() });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, data: "у вас нету разрешении" };
     }
 }
 
-
-export async function getOneUser(stuId){
-    const response=await axios.get('http://localhost:8091/home/user/'+stuId,{headers:authHeader()});
-    return response.data
-}
-
+// Функция для получения всех кинотеатров
 export const getAllCinema = async () => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/cinema`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
+// Функция для получения всех фильмов
 export const getAllMovie = async () => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/movie`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
+// Функция для получения всех сеансов
 export const getAllSeance = async () => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/seance`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
+// Функция для получения всех залов
+export const getAllHall = async () => {
+    try {
+        const response = await axios.get(`http://localhost:8091/hall`);
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для получения всех пользователей (для администратора)
 export const getAllUser = async () => {
-    try{
-        const response = await axios.get(`http://localhost:8091/user`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+    try {
+        const response = await axios.get(`http://localhost:8091/admin/user`);
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
-//One cinema
+// Функция для получения информации о конкретном кинотеатре
 export const getOneCinema = async (cinemaId) => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/cinema/${cinemaId}`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
-//One movie
+// Функция для получения информации о конкретном фильме
 export const getOneMovie = async (movieId) => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/movie/${movieId}`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
-//One Seance
+// Функция для получения информации о конкретном сеансе
 export const getOneSeance = async (seanceId) => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/seance/${seanceId}`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
-//One ticket
+// Функция для получения информации о конкретном билете
 export const getOneTicket = async (ticketId) => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/ticket/${ticketId}`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
+// Функция для покупки билета
 export const buyTicket = async (ticketId, userId) => {
-    try{
-        console.log(userId, ticketId)
-        const response = await axios.put(`http://localhost:8091/ticket/${ticketId}/user/${userId}`,{headers: authHeader()});
-        return {success: true, data: response.data};
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+    try {
+        const response = await axios.put(`http://localhost:8091/ticket/${ticketId}/user/${userId}`, { headers: authHeader() });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
-//Seances by movie ID
+// Функция для возврата билета
+export const returnTicket = async (ticketId) => {
+    try {
+        const response = await axios.put(`http://localhost:8091/ticket/${ticketId}`, { headers: authHeader() });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для получения сеансов по ID фильма
 export const getSeanceByMovieId = async (movieId) => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/movie/seance/${movieId}`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
+// Функция для получения билетов по ID сеанса
 export const getTicketBySeanceId = async (seanceId) => {
-    try{
+    try {
         const response = await axios.get(`http://localhost:8091/seance/ticket/${seanceId}`);
-        console.log(response)
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
-
-export async function addMovie(movie){
+// Функция для получения билетов по ID пользователя
+export const getTicketByUserId = async (userId) => {
     try {
-        const response = await axios.post('http://localhost:8091/movie', movie);
-        return {success: true, data: response.data};
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        const response = await axios.get(`http://localhost:8091/user/ticket/${userId}`);
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
-export async function addSeance(seance){
+// Функция для добавления нового фильма (для администратора)
+export async function addMovie(movie) {
     try {
-        const response = await axios.post('http://localhost:8091/seance', seance);
-        return {success: true, data: response.data.message};
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+        const response = await axios.post('http://localhost:8091/admin/movie', movie, { headers: authHeader() });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
+// Функция для добавления нового кинотеатра (для администратора)
+export async function addCinema(cinema) {
+    try {
+        const response = await axios.post('http://localhost:8091/admin/cinema', cinema, { headers: authHeader() });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для добавления нового сеанса (для администратора)
+export async function addSeance(seance) {
+    try {
+        const response = await axios.post('http://localhost:8091/admin/seance', seance, { headers: authHeader() });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для добавления нового зала (для администратора)
+export async function addHall(hall) {
+    try {
+        const response = await axios.post('http://localhost:8091/admin/hall', hall, { headers: authHeader() });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для обновления информации о фильме (для администратора)
 export const updateMovie = async (movie) => {
-    try{
-        const response = await axios.put(`http://localhost:8091/movie/${movie.id}/edit`, movie, { headers: authHeader()});
-        console.log(response)
-        return {success: true, data: response.data};
+    try {
+        const response = await axios.put(`http://localhost:8091/admin/movie/${movie.id}/edit`, movie, { headers: authHeader() });
+        console.log(response);
+        return { success: true, data: response.data };
 
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }
 
+// Функция для обновления информации о кинотеатре (для администратора)
+export const updateCinema = async (cinema) => {
+    try {
+        const response = await axios.put(`http://localhost:8091/admin/cinema/${cinema.id}/edit`, cinema, { headers: authHeader() });
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для удаления фильма (для администратора)
 export const deleteMovie = async (movieId) => {
-    try{
-        const response = await axios.delete(`http://localhost:8091/movie/${movieId}`);
-        return {success: true, data: response.data};
-        
-    }catch(error){
-        return {success: false, data: error.response.data.error};
+    try {
+        const response = await axios.delete(`http://localhost:8091/admin/movie/${movieId}`, { headers: authHeader() });
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для удаления кинотеатра (для администратора)
+export const deleteCinema = async (cinemaId) => {
+    try {
+        const response = await axios.delete(`http://localhost:8091/admin/cinema/${cinemaId}`, { headers: authHeader() });
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
+    }
+}
+
+// Функция для добавления мест в зал (для администратора)
+export const addPlace = async (hallId) => {
+    try {
+        const response = await axios.post(`http://localhost:8091/admin/placehall/${hallId}`, { headers: authHeader() });
+        console.log(response);
+        return { success: true, data: response.data };
+
+    } catch (error) {
+        return { success: false, data: error.response.data.error };
     }
 }

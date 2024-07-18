@@ -22,7 +22,7 @@ export default function CreateSeance(){
         const {success, data} = await addSeance(seance);
         if(success){
             navigate('/admin/seance', {state: {message: data}});
-            navigate('/admin/seance', {state: {message: data}});
+            navigate('/admin/seance');
         }else{
             toast(data)
         }

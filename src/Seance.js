@@ -49,7 +49,6 @@ export default function Seance(){
                 <div className="media">
                     <div class="media__preview">
                         <picture>
-                            <img src={spiderman} style={{width: "100px", height: "100px"}}/>
                         </picture>
                     </div>
                     <div class="media__content">

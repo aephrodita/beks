@@ -23,6 +23,26 @@ export default function Aside () {
                     </div>
                     <div class="aside-field-group">
                         <span>
+                            <Link to={"/admin/cinema"}>
+                                <div class="center">
+                                    <img src={movie} height={32} width={32}/>
+                                    <span class="pg-16">Cinema</span>
+                                </div>
+                            </Link>
+                        </span>
+                    </div>
+                    <div class="aside-field-group">
+                        <span>
+                            <Link to={"/admin/hall"}>
+                                <div class="center">
+                                    <img src={movie} height={32} width={32}/>
+                                    <span class="pg-16">Hall</span>
+                                </div>
+                            </Link>
+                        </span>
+                    </div>
+                    <div class="aside-field-group">
+                        <span>
                             <Link to={"/admin/movie"}>
                                 <div class="center">
                                     <img src={movie} height={32} width={32}/>
